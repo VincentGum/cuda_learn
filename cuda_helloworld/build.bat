@@ -1,1 +1,1 @@
-nvcc cuda_helloworld.cu -o build
+nvcc hello_1d.cu -o build

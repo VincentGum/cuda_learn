@@ -7,9 +7,6 @@ __global__ void add(int n, float *x, float *y, float *z) {
   const int stride = blockDim.x * gridDim.x; // 一个block中的线程数量
 
   for(int i = index; i < n; i += stride) {
-    // if(z[i] == x[i] + y[i]) {
-    //   printf("wasted\n");
-    // }    
     z[i] = x[i] + y[i];
   }
 }
