@@ -1,1 +1,1 @@
-nvcc hello_1d.cu -o build
+nvcc hello_advanced.cu -o build
