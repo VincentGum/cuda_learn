@@ -41,11 +41,17 @@ int main() {
   printf("block num: %d\n", numBlocks);
   printf("thread num: %d\n", blockSize);
 
-  cudaStream_t init_stream;  
-  cudaError_t err = cudaStreamCreate(&init_stream);  
-  init<<<numBlocks, blockSize, 0, init_stream>>>(N, x, 1.0f);
-  init<<<numBlocks, blockSize, 0, init_stream>>>(N, y, 2.0f);
-  init<<<numBlocks, blockSize, 0, init_stream>>>(N, z, 0.0f);
+  cudaStream_t init_stream_x;  
+  cudaStreamCreate(&init_stream_x);  
+  init<<<numBlocks, blockSize, 0, init_stream_x>>>(N, x, 1.0f);
+
+  cudaStream_t init_stream_y;
+  cudaStreamCreate(&init_stream_y);
+  init<<<numBlocks, blockSize, 0, init_stream_y>>>(N, y, 2.0f);
+
+  cudaStream_t init_stream_z;
+  cudaStreamCreate(&init_stream_z);
+  init<<<numBlocks, blockSize, 0, init_stream_z>>>(N, z, 0.0f);
 
   add<<<numBlocks, blockSize>>>(N, x, y, z);
   cudaDeviceSynchronize();
